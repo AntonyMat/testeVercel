@@ -1,0 +1,2206 @@
+/* ==========================================================================
+   PORTFÓLIO DESENVOLVEDOR BACK-END — ANTONY ALVES
+   Linguagens: HTML5, CSS3 e JavaScript Puro (Sem TypeScript)
+   Objetivo: Código limpo, didático, responsivo e versátil para vagas Back-End
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS CSS (PALETA DE CORES E TIPOGRAFIA)
+   Identidade moderna para Engenharia Back-End (Tons escuros + Verde Esmeralda/Terminal)
+   -------------------------------------------------------------------------- */
+:root {
+  --bg-fundo: #0a0f1d;         /* Fundo escuro elegante */
+  --bg-card: #131b2e;          /* Fundo dos cartões de projetos e seções */
+  --bg-card-hover: #1c2742;    /* Fundo ao passar o mouse */
+  --bg-terminal: #070a14;      /* Fundo da janela do terminal de servidor */
+  --borda: #23304d;            /* Cor das bordas sutis */
+  
+  --cor-destaque: #10b981;     /* Verde Esmeralda de Servidor / Terminal */
+  --cor-destaque-hover: #059669;
+  --cor-spring: #10b981;       /* Alias mantido para compatibilidade */
+  --cor-spring-hover: #059669;
+  --cor-java: #f97316;         /* Laranja característico de Java */
+  --cor-node: #22c55e;         /* Verde Node.js */
+  --cor-azul-sql: #38bdf8;     /* Azul ciano para SQL, PostgreSQL e Docker */
+  --cor-roxo: #a855f7;         /* Roxo para APIs e JWT */
+  --cor-ufma: #0284c7;         /* Azul acadêmico para UFMA */
+  --cor-iema: #10b981;         /* Verde institucional IEMA */
+  --cor-tre: #f59e0b;          /* Âmbar institucional TRE-MA */
+  --cor-perigo: #f43f5e;       /* Vermelho para alertas de erro HTTP */
+  
+  --texto-principal: #f8fafc;  /* Branco puro para leitura agradável */
+  --texto-secundario: #94a3b8; /* Cinza suave para parágrafos */
+  --texto-apagado: #64748b;    /* Cinza escuro para detalhes e metadados */
+  
+  --fonte-padrao: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --fonte-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --raio-borda: 12px;
+  --raio-pequeno: 6px;
+  --transicao: all 0.25s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET E PADRONIZAÇÃO GLOBAL
+   -------------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--fonte-padrao);
+  background-color: var(--bg-fundo);
+  color: var(--texto-principal);
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+code, pre, .mono {
+  font-family: var(--fonte-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transicao);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: var(--transicao);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. CABEÇALHO E BARRA DE NAVEGAÇÃO
+   -------------------------------------------------------------------------- */
+.cabecalho-principal {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 29, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.5rem;
+}
+
+.logo-dev {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.logo-icone {
+  width: 2.35rem;
+  height: 2.35rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: var(--raio-pequeno);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor-destaque);
+  font-family: var(--fonte-mono);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.logo-destaque {
+  color: var(--cor-destaque);
+}
+
+.logo-cargo {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--cor-destaque);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.menu-desktop {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu-desktop a {
+  font-size: 0.9rem;
+  color: var(--texto-secundario);
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.menu-desktop a:hover {
+  color: var(--texto-principal);
+  background: var(--bg-card);
+}
+
+.nav-acoes-direita {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-menu-hamburguer {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--texto-principal);
+  padding: 0.5rem;
+}
+
+.menu-mobile {
+  display: none;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--borda);
+  gap: 0.75rem;
+}
+
+.menu-mobile.ativo {
+  display: flex;
+}
+
+.menu-mobile a {
+  padding: 0.5rem 0;
+  color: var(--texto-secundario);
+  font-size: 1rem;
+}
+
+.menu-mobile a:hover {
+  color: var(--cor-destaque);
+}
+
+/* --------------------------------------------------------------------------
+   4. BOTÕES, BADGES E REDES SOCIAIS
+   -------------------------------------------------------------------------- */
+.btn-primario {
+  background: var(--cor-destaque);
+  color: #050b14;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--raio-pequeno);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.btn-primario:hover {
+  background: var(--cor-destaque-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secundario {
+  background: var(--bg-card);
+  color: var(--texto-principal);
+  border: 1px solid var(--borda);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--raio-pequeno);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secundario:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--texto-apagado);
+}
+
+/* Botão em destaque para acesso ao Currículo (CV) */
+.btn-cv {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(56, 189, 248, 0.15));
+  color: var(--cor-destaque);
+  border: 1px solid var(--cor-destaque);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--raio-pequeno);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-cv:hover {
+  background: var(--cor-destaque);
+  color: #050b14;
+  transform: translateY(-2px);
+}
+
+/* Botões Sociais (GitHub e LinkedIn) */
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: var(--raio-pequeno);
+  border: 1px solid var(--borda);
+  background: var(--bg-card);
+  color: var(--texto-principal);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-social:hover {
+  transform: translateY(-2px);
+}
+
+.btn-github:hover {
+  background: #24292e;
+  border-color: #5c6065;
+  color: #ffffff;
+}
+
+.btn-email:hover {
+  background: #ea4335;
+  border-color: #ea4335;
+  color: #ffffff;
+}
+
+.btn-linkedin:hover {
+  background: #0a66c2;
+  border-color: #0a66c2;
+  color: #ffffff;
+}
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: var(--cor-destaque);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.ponto-pulso {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--cor-destaque);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--cor-destaque);
+}
+
+/* --------------------------------------------------------------------------
+   5. SEÇÃO HERO (APRESENTAÇÃO BACK-END + TERMINAL DE SERVIDOR)
+   -------------------------------------------------------------------------- */
+.secao-hero {
+  padding: 4.5rem 0 5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-titulo {
+  font-size: 2.75rem;
+  line-height: 1.2;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+}
+
+.hero-descricao {
+  font-size: 1.05rem;
+  color: var(--texto-secundario);
+  margin-bottom: 1.75rem;
+  max-width: 95%;
+  line-height: 1.65;
+}
+
+.hero-acoes-principais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-redes-recrutador {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.75rem 1rem;
+  background: rgba(19, 27, 46, 0.6);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+}
+
+.hero-redes-rotulo {
+  font-size: 0.8rem;
+  font-family: var(--fonte-mono);
+  color: var(--texto-apagado);
+  text-transform: uppercase;
+}
+
+.hero-cards-metricas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .hero-cards-metricas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-metrica {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  padding: 0.85rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.card-metrica-rotulo {
+  font-size: 0.7rem;
+  color: var(--texto-apagado);
+  text-transform: uppercase;
+  font-family: var(--fonte-mono);
+}
+
+.card-metrica-valor {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cor-destaque);
+  margin-top: 0.2rem;
+}
+
+/* Ilustração Artística Conceitual Back-End (PNG Transparente Integrado ao Fundo) */
+.hero-ilustracao-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  pointer-events: none; /* Não reage e não bloqueia interações do mouse */
+  user-select: none;
+}
+
+.hero-ilustracao-glow {
+  position: absolute;
+  inset: 0%;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.16) 0%, rgba(14, 165, 233, 0.08) 35%, transparent 70%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-ilustracao-figura {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  /* Sem transição ou reação ao hover */
+}
+
+.hero-ilustracao-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 20px rgba(16, 185, 129, 0.15));
+}
+
+/* Terminal de Servidor Back-End */
+.terminal-janela {
+  background: #060b13;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-borda);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-barra-superior {
+  background: #03070f;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--borda);
+}
+
+.terminal-botoes {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.bolinha {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  opacity: 0.75;
+}
+.bolinha-vermelha { background: #ef4444; }
+.bolinha-amarela { background: #f59e0b; }
+.bolinha-verde { background: #10b981; }
+
+.terminal-titulo-aba {
+  font-family: var(--fonte-mono);
+  font-size: 0.74rem;
+  color: var(--texto-secundario);
+}
+
+.terminal-status-online {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--cor-destaque);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.terminal-conteudo {
+  padding: 1.15rem 1.25rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.81rem;
+  min-height: 220px;
+  max-height: 250px;
+  overflow-y: auto;
+  line-height: 1.7;
+  background: #060b13;
+}
+
+.log-linha {
+  margin-bottom: 0.35rem;
+  word-break: break-all;
+  color: #94a3b8;
+}
+
+.log-comando {
+  color: #f8fafc;
+  font-weight: 500;
+}
+
+.log-ok {
+  color: #34d399;
+}
+
+.log-req {
+  color: #60a5fa;
+  font-weight: 500;
+}
+
+.log-res {
+  color: #34d399;
+  font-weight: 600;
+}
+
+.log-sql {
+  color: #fbbf24;
+}
+
+.log-muted {
+  color: #64748b;
+  font-size: 0.78rem;
+}
+
+.terminal-controles {
+  background: #03070f;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.terminal-controles-acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.terminal-controles-rotulo {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  color: var(--texto-apagado);
+  text-transform: uppercase;
+}
+
+.btn-terminal {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--texto-secundario);
+  border: 1px solid var(--borda);
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--raio-pequeno);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-terminal:hover {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+
+.btn-terminal-limpar {
+  color: var(--texto-apagado);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.55rem;
+}
+
+.btn-terminal-limpar:hover {
+  color: var(--texto-principal);
+  border-color: #64748b;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   6. SEÇÃO SOBRE MIM & FORMAÇÃO ACADÊMICA (UFMA, IEMA & TRE-MA)
+   -------------------------------------------------------------------------- */
+.secao-sobre {
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.cabecalho-secao {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.subtitulo-secao {
+  font-family: var(--fonte-mono);
+  color: var(--cor-destaque);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.titulo-secao {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-top: 0.5rem;
+}
+
+.texto-secao {
+  color: var(--texto-secundario);
+  font-size: 1rem;
+  margin-top: 0.75rem;
+}
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .sobre-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.sobre-bloco {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  padding: 1.75rem;
+  border-radius: var(--raio-borda);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 640px) {
+  .sobre-bloco {
+    padding: 1.25rem;
+  }
+}
+
+.sobre-bloco h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sobre-bloco p {
+  color: var(--texto-secundario);
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Caixa de Objetivo Profissional */
+.sobre-objetivo-box {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.95rem;
+  background: rgba(16, 185, 129, 0.06);
+  border-left: 3px solid var(--cor-destaque);
+  border-radius: var(--raio-pequeno);
+}
+
+.sobre-objetivo-rotulo {
+  color: var(--cor-destaque);
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.sobre-objetivo-texto {
+  font-size: 0.8rem;
+  color: var(--texto-secundario);
+  line-height: 1.45;
+  margin: 0 !important;
+}
+
+/* Cards de Formação e Estágio */
+.cards-formacao-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.card-experiencia-item {
+  background: var(--bg-terminal);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 0.8rem 1rem;
+  position: relative;
+  transition: var(--transicao);
+}
+
+.card-experiencia-item:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateX(3px);
+}
+
+.card-experiencia-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-experiencia-instituicao {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card-experiencia-tag {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tag-ufma {
+  background: rgba(2, 132, 199, 0.15);
+  color: var(--cor-ufma);
+  border: 1px solid rgba(2, 132, 199, 0.4);
+}
+
+.tag-iema {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--cor-iema);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.tag-tre {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--cor-tre);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.card-experiencia-curso {
+  font-size: 0.82rem;
+  color: var(--cor-destaque);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.card-experiencia-desc {
+  font-size: 0.77rem;
+  color: var(--texto-secundario);
+  line-height: 1.45;
+  margin-bottom: 0 !important;
+}
+
+.btn-cv-wrapper-sobre {
+  margin-top: 0.85rem;
+  text-align: center;
+}
+
+.btn-cv-sobre {
+  width: 100%;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  font-size: 0.82rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. SEÇÃO HABILIDADES TÉCNICAS (STACK AMPLA BACK-END)
+   -------------------------------------------------------------------------- */
+.secao-habilidades {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--borda);
+  background: rgba(19, 27, 46, 0.35);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  padding: 1.5rem;
+  border-radius: var(--raio-borda);
+  transition: var(--transicao);
+}
+
+.skill-card:hover {
+  border-color: var(--cor-destaque);
+  transform: translateY(-3px);
+}
+
+.skill-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.skill-nome {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.skill-badge {
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--raio-pequeno);
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--cor-destaque);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.skill-barra-progresso {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-terminal);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.skill-barra-preenchimento {
+  height: 100%;
+  background: var(--cor-destaque);
+  border-radius: 9999px;
+}
+
+.skill-descricao {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  margin-bottom: 0.75rem;
+}
+
+.skill-aplicacao {
+  font-size: 0.8rem;
+  color: var(--texto-apagado);
+  border-top: 1px solid var(--borda);
+  padding-top: 0.5rem;
+}
+
+.skill-aplicacao strong {
+  color: var(--cor-azul-sql);
+}
+
+/* --------------------------------------------------------------------------
+   8. SEÇÃO DE PROJETOS (RESUMO OBJETIVO & INTEGRAÇÃO GITHUB)
+   -------------------------------------------------------------------------- */
+.secao-projetos {
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.projeto-card-compacto {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-borda);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transicao);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.projeto-card-compacto:hover {
+  border-color: rgba(16, 185, 129, 0.55);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+
+.projeto-card-compacto:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 3px;
+}
+
+.projeto-card-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.15rem;
+}
+
+.projeto-icone-pasta {
+  color: var(--cor-destaque);
+  display: flex;
+  align-items: center;
+}
+
+.projeto-cabecalho-acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-ver-prompt {
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transicao);
+}
+
+.projeto-card-compacto:hover .badge-ver-prompt {
+  background: var(--cor-destaque);
+  color: var(--bg-profundo);
+  border-color: var(--cor-destaque);
+}
+
+.projeto-link-github-icone {
+  color: var(--texto-apagado);
+  transition: var(--transicao);
+  display: flex;
+  align-items: center;
+  padding: 0.35rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.projeto-link-github-icone:hover {
+  color: var(--texto-principal);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.projeto-card-titulo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  margin-bottom: 0.65rem;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.projeto-card-compacto:hover .projeto-card-titulo {
+  color: var(--cor-destaque);
+}
+
+.projeto-card-resumo {
+  font-size: 0.88rem;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.projeto-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.35rem;
+}
+
+.tag-stack {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  border: 1px solid var(--borda);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.projeto-card-rodape {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 1rem;
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.btn-abrir-prompt-projeto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--texto-principal);
+  border: 1px solid var(--borda);
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--raio-pequeno);
+  cursor: pointer;
+  transition: var(--transicao);
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-abrir-prompt-projeto:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+.btn-github-projeto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--cor-destaque);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--raio-pequeno);
+  text-decoration: none;
+  transition: var(--transicao);
+  flex: 1;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-github-projeto:hover {
+  background: var(--cor-destaque);
+  color: var(--bg-profundo);
+  border-color: var(--cor-destaque);
+}
+
+.btn-github-projeto .icone-seta-externa {
+  transition: transform 0.2s ease;
+}
+
+.btn-github-projeto:hover .icone-seta-externa {
+  transform: translateX(2px) translateY(-2px);
+}
+
+/* Banner Destacado para o Recrutador Explorar o GitHub */
+.github-destaque-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--raio-borda);
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.github-destaque-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.github-destaque-icone {
+  color: var(--cor-destaque);
+  background: rgba(16, 185, 129, 0.12);
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.github-destaque-titulo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  margin-bottom: 0.25rem;
+}
+
+.github-destaque-texto {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.btn-visitar-github {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   9. SEÇÃO CONTATO COM ATALHOS PARA GITHUB, LINKEDIN E CV
+   -------------------------------------------------------------------------- */
+.secao-contato {
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 3rem;
+}
+
+.contato-info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-borda);
+  padding: 2.25rem;
+}
+
+.contato-info-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.contato-info-card p {
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.contato-links-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.contato-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-terminal);
+  border: 1px solid var(--borda);
+  padding: 0.85rem 1rem;
+  border-radius: var(--raio-pequeno);
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+}
+
+button.contato-link-item {
+  color: var(--texto-principal);
+  transition: all 0.2s ease;
+}
+
+button.contato-link-item:hover {
+  border-color: var(--cor-destaque);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.contato-redes-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contato-formulario {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-borda);
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-grupo label {
+  font-size: 0.8rem;
+  font-family: var(--fonte-mono);
+  color: var(--texto-secundario);
+}
+
+.form-input, .form-textarea {
+  background: var(--bg-terminal);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 0.65rem 0.85rem;
+  color: var(--texto-principal);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transicao);
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 1px var(--cor-destaque);
+}
+
+.form-mensagem-feedback {
+  display: none;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--cor-destaque);
+  color: var(--cor-destaque);
+  padding: 0.75rem 1rem;
+  border-radius: var(--raio-pequeno);
+  font-size: 0.85rem;
+}
+
+.form-mensagem-feedback.visivel {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   10. MODAIS (CÓDIGO DIDÁTICO E VISUALIZADOR DE CURRÍCULO CV)
+   -------------------------------------------------------------------------- */
+/* Esconde todos os modais por padrão */
+.modal-overlay {
+  display: none; /* ou visibility: hidden; opacity: 0; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mostra o modal quando o JavaScript injeta a classe .ativo */
+.modal-overlay.ativo {
+  display: flex; /* ou visibility: visible; opacity: 1; */
+}
+
+/* Esconde a gaveta do menu mobile por padrão e mostra quando ativa */
+.menu-mobile {
+  display: none;
+}
+
+.menu-mobile.ativo {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-janela {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-borda);
+  width: 100%;
+  max-width: 880px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
+}
+
+.modal-janela-cv {
+  max-width: 820px;
+}
+
+.modal-janela-email {
+  max-width: 490px;
+}
+
+.modal-email-conteudo {
+  padding: 1.5rem;
+}
+
+.modal-email-descricao {
+  font-size: 0.95rem;
+  color: var(--texto-secundario);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.modal-email-endereco-box {
+  background: rgba(5, 11, 20, 0.7);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.modal-email-rotulo {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texto-apagado);
+}
+
+.modal-email-valor {
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  word-break: break-all;
+}
+
+.modal-email-opcoes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modal-email-btn-opcao {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: rgba(19, 27, 46, 0.6);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  color: var(--texto-principal);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.modal-email-btn-opcao:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--cor-destaque);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-email-btn-enviar:hover {
+  background: rgba(234, 67, 53, 0.12);
+  border-color: #ea4335;
+}
+
+.modal-email-btn-icone {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--raio-pequeno);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--cor-destaque);
+  transition: all 0.2s ease;
+}
+
+.modal-email-btn-enviar .modal-email-btn-icone {
+  color: #ea4335;
+}
+
+.modal-email-btn-opcao:hover .modal-email-btn-icone {
+  background: var(--cor-destaque);
+  color: #050b14;
+  border-color: var(--cor-destaque);
+}
+
+.modal-email-btn-enviar:hover .modal-email-btn-icone {
+  background: #ea4335;
+  color: #ffffff;
+  border-color: #ea4335;
+}
+
+.modal-email-btn-textos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.modal-email-btn-titulo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.modal-email-btn-sub {
+  font-size: 0.8rem;
+  color: var(--texto-secundario);
+}
+
+.feedback-copia-email {
+  display: none;
+  padding: 0.75rem 1rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--cor-destaque);
+  color: var(--cor-destaque);
+  border-radius: var(--raio-pequeno);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 0.5rem;
+  animation: fadeIn 0.25s ease;
+}
+
+.feedback-copia-email.visivel {
+  display: block;
+}
+
+.modal-cabecalho {
+  padding: 1rem 1.5rem;
+  background: #050811;
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.btn-fechar-modal {
+  font-size: 1.5rem;
+  color: var(--texto-apagado);
+  padding: 0.25rem;
+}
+
+.btn-fechar-modal:hover {
+  color: var(--texto-principal);
+}
+
+.modal-conteudo {
+  padding: 1.5rem;
+  overflow-y: auto;
+  font-size: 0.95rem;
+}
+
+.modal-codigo-pre {
+  background: var(--bg-terminal);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 1.25rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* Modal de Detalhes Completos do Projeto */
+.modal-janela-projeto {
+  max-width: 840px;
+  width: 95%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-projeto-cabecalho-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.modal-projeto-badge {
+  font-family: var(--fonte-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--cor-destaque);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-projeto-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.modal-projeto-secao {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 1.15rem 1.25rem;
+}
+
+.modal-projeto-secao-titulo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-projeto-icone-secao {
+  font-size: 1.05rem;
+}
+
+.modal-projeto-texto {
+  font-size: 0.9rem;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-projeto-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-projeto-lista li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  color: var(--texto-secundario);
+  line-height: 1.55;
+}
+
+.modal-projeto-lista li::before {
+  content: "•";
+  position: absolute;
+  left: 0.25rem;
+  color: var(--cor-destaque);
+  font-size: 1.2rem;
+  line-height: 1;
+  top: 0.05rem;
+}
+
+.modal-projeto-rotas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg-terminal);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 0.85rem;
+}
+
+.modal-rota-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.metodo-badge {
+  font-weight: 800;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.metodo-badge.metodo-get {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--cor-destaque);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.metodo-badge.metodo-post {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.metodo-badge.metodo-put {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.metodo-badge.metodo-delete {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--cor-perigo);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.modal-rota-caminho {
+  color: var(--texto-principal);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.modal-rota-desc {
+  color: var(--texto-apagado);
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
+.modal-projeto-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.modal-projeto-codigo-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-projeto-arquivo-badge {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.modal-btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-rodape {
+  padding: 0.85rem 1.5rem;
+  background: var(--bg-terminal);
+  border-top: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Documento de Currículo (Estilizado como papel profissional para o recrutador) */
+.cv-documento {
+  background: #0b1120;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 2.25rem;
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.cv-cabecalho-doc {
+  border-bottom: 2px solid var(--cor-destaque);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.cv-nome {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.cv-cargo {
+  font-size: 1.1rem;
+  color: var(--cor-destaque);
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.cv-contatos-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.cv-secao-titulo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--cor-destaque);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 0.35rem;
+  margin: 1.5rem 0 0.85rem 0;
+}
+
+.cv-item {
+  margin-bottom: 1rem;
+}
+
+.cv-item-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cv-item-titulo {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 0.98rem;
+}
+
+.cv-item-data {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  color: var(--cor-destaque);
+}
+
+.cv-item-subtitulo {
+  font-size: 0.88rem;
+  color: var(--cor-azul-sql);
+  margin-bottom: 0.25rem;
+}
+
+.cv-lista-bullets {
+  padding-left: 1.25rem;
+  color: var(--texto-secundario);
+  font-size: 0.88rem;
+}
+
+.cv-lista-bullets li {
+  margin-bottom: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. RODAPÉ (FOOTER)
+   -------------------------------------------------------------------------- */
+.rodape-principal {
+  padding: 3rem 0 2.5rem 0;
+  background: #04060c;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-apagado);
+  font-size: 0.85rem;
+}
+
+.rodape-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.rodape-identificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rodape-autor {
+  font-weight: 600;
+  color: var(--texto-principal);
+  font-size: 0.9rem;
+}
+
+.rodape-stack-info {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--cor-destaque);
+}
+
+/* Bloco Empresa Patrocinadora do Programa */
+.rodape-patrocinador {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  background: rgba(13, 19, 33, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.65rem 1.15rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rodape-patrocinador:hover {
+  border-color: rgba(0, 210, 255, 0.35);
+  background: rgba(13, 19, 33, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 210, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.rodape-patrocinador-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: right;
+}
+
+.rodape-patrocinador-rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-destaque);
+}
+
+.rodape-pulso-ativo {
+  width: 7px;
+  height: 7px;
+  background-color: var(--sucesso);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px var(--sucesso);
+  animation: pulsoVerde 2s infinite ease-in-out;
+}
+
+@keyframes pulsoVerde {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.6;
+  }
+}
+
+.rodape-patrocinador-subtitulo {
+  font-size: 0.7rem;
+  color: var(--texto-apagado);
+}
+
+.rodape-patrocinador-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.65rem;
+  background: rgba(4, 6, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.rodape-patrocinador-link:hover {
+  border-color: var(--cor-destaque);
+  background: rgba(0, 210, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.2);
+}
+
+.rodape-patrocinador-logo {
+  height: 42px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.rodape-patrocinador-link:hover .rodape-patrocinador-logo {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.5));
+}
+
+.rodape-links-sociais {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. MEDIA QUERIES (DESIGN 100% RESPONSIVO)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .projeto-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .contato-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sobre-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rodape-conteudo {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 1.75rem;
+  }
+
+  .rodape-patrocinador {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem 1.5rem;
+  }
+
+  .rodape-patrocinador-texto {
+    text-align: center;
+    align-items: center;
+  }
+
+  .rodape-identificacao {
+    text-align: center;
+  }
+
+  .rodape-links-sociais {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-desktop {
+    display: none;
+  }
+  
+  .btn-menu-hamburguer {
+    display: block;
+  }
+  
+  .hero-titulo {
+    font-size: 2.2rem;
+  }
+  
+  .hero-cards-metricas {
+    grid-template-columns: 1fr;
+  }
+  
+  .titulo-secao {
+    font-size: 1.8rem;
+  }
+  
+  .hero-redes-recrutador {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cv-documento {
+    padding: 1.25rem;
+  }
+  
+  .cv-nome {
+    font-size: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6.1. DESTAQUES DE MÉRITO, ROBÓTICA & JOVEM TECH (DENTRO DE SOBRE MIM)
+   -------------------------------------------------------------------------- */
+.sobre-destaques-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.sobre-destaque-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  padding: 0.75rem 0.9rem;
+  transition: var(--transicao);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sobre-destaque-item.destaque-destacado {
+  grid-column: 1 / -1;
+}
+
+.sobre-destaque-item:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.sobre-destaque-item.destaque-ouro {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(255, 255, 255, 0.02) 65%);
+}
+
+.sobre-destaque-item.destaque-ouro:hover {
+  border-color: rgba(245, 158, 11, 0.65);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.08);
+}
+
+.sobre-destaque-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.sobre-destaque-icone {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.sobre-destaque-titulo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+
+.sobre-destaque-desc {
+  font-size: 0.76rem !important;
+  color: var(--texto-secundario);
+  line-height: 1.45 !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 520px) {
+  .sobre-destaques-grid {
+    grid-template-columns: 1fr;
+  }
+  .sobre-destaque-item.destaque-destacado {
+    grid-column: 1;
+  }
+}
+
+/* Badges de reconhecimento */
+.conquista-badge {
+  font-family: var(--fonte-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.badge-mundial {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.badge-nacional {
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.35);
+}
+
+.badge-tech {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--cor-destaque);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Tag Jovem Tech e Robótica para cards de formação */
+.tag-jovem-tech {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--cor-destaque);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.tag-robotica {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Otimização especial para Recrutadores Imprimirem o CV em PDF */
+@media print {
+  /* 1. Remove TODO o conteúdo do site do fluxo da página, deixando APENAS o modal do CV */
+  body > *:not(#modal-cv) {
+    display: none !important;
+  }
+
+  /* 2. Reseta o tamanho do html e body, anulando o min-height: 100vh original */
+  html, body {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    margin: 0;
+    padding: 0;
+    background: #ffffff !important;
+  }
+
+  /* 3. Transforma o modal em um bloco estático (como uma página normal) */
+  #modal-cv {
+    display: block !important;
+    position: relative !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    padding: 0;
+  }
+
+  /* 4. Remove sombras e restrições da janela interna do CV */
+  .modal-janela-cv {
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  /* 5. Esconde os botões e cabeçalhos do modal */
+  .modal-cabecalho, 
+  .modal-rodape,
+  .btn-fechar-modal,
+  .btn-fechar-modal-acao,
+  #btn-imprimir-cv {
+    display: none !important;
+  }
+
+  /* 6. Evita que itens do currículo sejam cortados pela metade */
+  .cv-secao-titulo {
+    page-break-after: avoid;
+  }
+  .cv-item {
+    page-break-inside: avoid;
+  }
+
+  /* 7. Cores otimizadas para o papel */
+  .cv-documento {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .cv-nome {
+    color: #111827 !important;
+  }
+  .cv-cargo, .cv-secao-titulo, .cv-item-data {
+    color: #059669 !important;
+  }
+  .cv-item-titulo {
+    color: #000000 !important;
+  }
+  .cv-item-subtitulo {
+    color: #0284c7 !important;
+  }
+  .cv-lista-bullets {
+    color: #374151 !important;
+  }
+  .cv-cabecalho-doc {
+    border-bottom: 2px solid #059669 !important;
+  }
+  
+  .modal-overlay {
+    background: transparent !important;
+  }
+}
